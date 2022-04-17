@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:4000/'
+const baseUrl = 'https://puc-iec-asd-nodejs.herokuapp.com/'
 const btnSearch = document.querySelector("#search")
 var magnetModal = new bootstrap.Modal(document.getElementById('magnetModal'), {
     keyboard: false
