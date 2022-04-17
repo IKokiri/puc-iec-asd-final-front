@@ -1,5 +1,5 @@
+const baseUrl = 'http://localhost:4000/'
 const btnSearch = document.querySelector("#search")
-
 var magnetModal = new bootstrap.Modal(document.getElementById('magnetModal'), {
     keyboard: false
 })
@@ -59,6 +59,9 @@ const listGridVerified = (movies) => {
             <td>
                 ${movie.rate+1}
             </td>
+            <td>
+                ${movie.verified}
+            </td>
         </tr>`
     }
 
@@ -67,7 +70,7 @@ const listGridVerified = (movies) => {
 
 const search = async (term) => {
 
-    const data = await fetch(`http://localhost:4000/search/${term}`)
+    const data = await fetch(`${baseUrl}search/${term}`)
         .then(data => {
             return data.json()
         })
@@ -80,7 +83,7 @@ const search = async (term) => {
 
 const verifieds = async (term) => {
     
-    const data = await fetch(`http://localhost:4000/verified/`)
+    const data = await fetch(`${baseUrl}verified/`)
         .then(data => {
             return data.json()
         })
@@ -130,7 +133,7 @@ const listMagnets = (magnets) => {
 
 const getMagnet = async (movieData) => {
 
-    const magnets = await fetch('http://localhost:4000/search/magnet', {
+    const magnets = await fetch(`${baseUrl}search/magnet`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
