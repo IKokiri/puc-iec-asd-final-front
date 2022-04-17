@@ -17,8 +17,18 @@ const getMovieVerifiedDataById = (id) => {
     const movie = allMoviesVerifieds.filter(movie => movie.id == id)
     return movie[0]
 }
+const searching = () => {
+    btnSearch.classList.add('disabled')
+    btnSearch.innerHTML = 'agurade . . .'
+}
+
+const found = () => {
+    btnSearch.classList.remove('disabled')
+    btnSearch.innerHTML = 'Buscar'
+}
 
 btnSearch.addEventListener("click", async () => {
+    searching()
     const term = document.querySelector('#term').value
     const movies = await search(term)
     allMovies = movies
@@ -79,6 +89,7 @@ const search = async (term) => {
             alert('Tivemos problemas ao obter essas informações, por favor, tente novamente altere a busca. vamos buscar um servidor melhor')
             // Catch and display errors
         })
+        found()
     return data
 }
 
