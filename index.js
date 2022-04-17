@@ -5,9 +5,15 @@ var magnetModal = new bootstrap.Modal(document.getElementById('magnetModal'), {
 })
 
 let allMovies = []
+let allMoviesVerifieds = []
 
 const getMovieDataById = (id) => {
     const movie = allMovies.filter(movie => movie.id == id)
+    return movie[0]
+}
+
+const getMovieVerifiedDataById = (id) => {
+    const movie = allMoviesVerifieds.filter(movie => movie.id == id)
     return movie[0]
 }
 
@@ -17,7 +23,6 @@ btnSearch.addEventListener("click", async () => {
     allMovies = movies
     listGrid(movies)
 });
-
 
 const listGrid = (movies) => {
     let tr = ''
@@ -29,12 +34,35 @@ const listGrid = (movies) => {
             </td>
             <td>
                 <button class='btn btn-success' onClick=getDataMovie('${movie.id}')>
-                    Magnet
+                    Buscar Magnets
                 </button>
             </td>
         </tr>`
     }
-    document.querySelector('table tbody').innerHTML = tr
+    document.querySelector('#bodySearch').innerHTML = tr
+}
+
+
+const listGridVerified = (movies) => {
+    let tr = ''
+    for (let movie of movies) {
+        tr +=
+            `<tr>
+            <td>
+                ${movie.title}
+            </td>
+            <td>
+                <button class='btn btn-success' onClick=getDataMovieVerified('${movie.id}')>
+                    Buscar Magnets
+                </button>
+            </td>
+            <td>
+                ${movie.rate+1}
+            </td>
+        </tr>`
+    }
+
+    document.querySelector('#bodyVerified').innerHTML = tr
 }
 
 const search = async (term) => {
@@ -50,8 +78,29 @@ const search = async (term) => {
     return data
 }
 
+const verifieds = async (term) => {
+    
+    const data = await fetch(`http://localhost:4000/verified/`)
+        .then(data => {
+            return data.json()
+        })
+        .catch(err => {
+            // Catch and display errors
+        })
+        allMoviesVerifieds = data
+        listGridVerified(data)
+}
+verifieds()
+
 const getDataMovie = async (id) =>{
     const movieData = getMovieDataById(id)
+    const magnets = await getMagnet(movieData)
+   
+    listMagnets(magnets)
+}
+
+const getDataMovieVerified = async (id) =>{
+    const movieData = getMovieVerifiedDataById(id)
     const magnets = await getMagnet(movieData)
    
     listMagnets(magnets)
@@ -64,8 +113,15 @@ const listMagnets = (magnets) => {
         magnetLinks += 
         `
         <div class='row'>
+        <div class='col'>
         <a class='btn btn-link' href='${magnet}'>Download ${count++}</a>
         </div>
+        <div class='col'>
+        <button class='btn btn-info'>Verificado</button>
+        </div>
+        </div>
+
+        <br/>
         `
     }
     document.querySelector('.modal-body').innerHTML = magnetLinks
@@ -89,5 +145,4 @@ const getMagnet = async (movieData) => {
             // Catch and display errors
         })
         return magnets
-
 }

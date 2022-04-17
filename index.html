@@ -11,9 +11,12 @@
 </head>
 
 <body>
-
     <div class="container">
         <h2>MAGNET SEM AD</h2>
+        <small>
+            Caso itens com direitos autorais sejam exibidos, favor não fazer download.
+            Nosso foco é facilitar o download de arquivos livres, eliminando os ADs.
+        </small>
         <div class="row">
             <div class="col-10">
                 <input type="text" class="form-control" id="term" placeholder="Busca">
@@ -24,30 +27,41 @@
         </div>
 
         <table class="table table-striped">
-          <thead>
-              <tr>
-                  <th>Nome</th>
-                  <th>Buscar</th>
-              </tr>
-          </thead> 
-          <tbody>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Buscar</th>
+                </tr>
+            </thead>
+            <tbody id="bodySearch">
 
-          </tbody>
+            </tbody>
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> Mais Baixados e verificados</th>
+                </tr>
+            </thead>
+            <tbody id="bodyVerified">
+
+            </tbody>
         </table>
 
         <div class="modal" id="magnetModal" tabindex="-1">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Downloads Disponíveis</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Downloads Disponíveis</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id='body' class="modal-body">
+
+                    </div>
                 </div>
-                <div class="modal-body">
-                  
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
