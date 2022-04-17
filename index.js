@@ -1,4 +1,5 @@
 const baseUrl = 'https://puc-iec-asd-nodejs.herokuapp.com/'
+// const baseUrl = 'http://localhost:4000/'
 const btnSearch = document.querySelector("#search")
 var magnetModal = new bootstrap.Modal(document.getElementById('magnetModal'), {
     keyboard: false
@@ -75,9 +76,9 @@ const search = async (term) => {
             return data.json()
         })
         .catch(err => {
+            alert('Tivemos problemas ao obter essas informações, por favor, tente novamente altere a busca. vamos buscar um servidor melhor')
             // Catch and display errors
         })
-
     return data
 }
 
